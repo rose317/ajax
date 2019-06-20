@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script type="text/javascript" src="js/jquery-1.12.4.min.js"></script>
+	<script type="text/javascript">
+
+		$(function(){
+			$('#input01').keyup(function(){
+				var $Val = $(this).val()
+
+				$.ajax({
+					url:'https://sug.so.360.cn/suggest?',
+					type:'get',
+					dataType:'jsonp',
+					data:{'word': $Val}
+				})
+				.done(function(data){
+					var dat = data.s;
+					$('#list01').empty();
+					for(var i=0;i<dat.length;i++){
+						var $newli = $('<li>');
+						$newli.html(dat[i]);
+						$('#list01').append($newli);
+
+					}
+				})
+
+			})
+
+		})
+
+	</script>
+</head>
+<body>
+	<input type="text" name="" id='input01'>
+	<ul id="list01">
+		
+	</ul>
+	
+</body>
+</html>
